@@ -14,9 +14,9 @@ import {
   SquareTerminal,
 } from 'lucide-react'
 
-import { NavMain } from '@/components/nav-main'
-import { NavProjects } from '@/components/nav-projects'
-import { NavUser } from '@/components/nav-user'
+import { NavMain } from '@/components/app/nav-main'
+import { NavProjects } from '@/components/app/nav-projects'
+import { NavUser } from '@/components/app/nav-user'
 
 import {
   Sidebar,
@@ -28,7 +28,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
-import AppLogo from './app/app-logo'
+import AppLogo from './app-logo'
 import Link from 'next/link';
 
 // This is sample data.

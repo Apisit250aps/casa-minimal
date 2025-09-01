@@ -1,5 +1,5 @@
 import AppLogo from '@/components/app/app-logo'
-import { LoginForm } from '@/components/login-form'
+import { LoginForm } from '@/components/app/login-form'
 import Image from 'next/image'
 import Link from 'next/link'
 
