@@ -18,6 +18,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
+
+import { Skeleton } from '@/components/ui/skeleton'
+
 import { signOut, useSession } from 'next-auth/react'
 
 export function NavUser() {
@@ -41,7 +44,9 @@ export function NavUser() {
                   src={session?.user?.image || ''}
                   alt={session?.user?.name || ''}
                 />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">
+                  <Skeleton className="h-8 w-8 rounded-lg" />
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
@@ -65,7 +70,9 @@ export function NavUser() {
                     src={session?.user?.image || ''}
                     alt={session?.user?.name || ''}
                   />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">
+                    <Skeleton className="h-8 w-8 rounded-lg" />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
@@ -77,8 +84,6 @@ export function NavUser() {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
