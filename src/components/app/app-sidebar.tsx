@@ -29,7 +29,7 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 import AppLogo from './app-logo'
-import Link from 'next/link';
+import Link from 'next/link'
 
 // This is sample data.
 const data = {
@@ -184,7 +184,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

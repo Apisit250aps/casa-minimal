@@ -1,15 +1,33 @@
 import NextAuth, { NextAuthRequest } from 'next-auth'
 import authConfig from './config/auth'
 import { NextResponse } from 'next/server'
-// Use only one of the two middleware options below
-// 1. Use middleware directly
-// export const { auth: middleware } = NextAuth(authConfig)
 
-// 2. Wrapped middleware option
 const { auth } = NextAuth(authConfig)
+
+const PROTECTED_PATHS = ['/admin', '/dashboard', '/profile']
+
 export default auth(async (req: NextAuthRequest) => {
-  // Your custom middleware logic goes here
-  console.log(req.auth)
+  const pathname = req.nextUrl.pathname
+  const auth = req.auth
+
+  if (pathname.startsWith('/login')) {
+    if (auth) {
+      return NextResponse.redirect(new URL('/', req.url))
+    }
+  }
+
+  if (PROTECTED_PATHS.some((path) => pathname.startsWith(path))) {
+    if (!auth) {
+      return NextResponse.redirect(new URL('/login', req.url))
+    }
+
+    if (pathname.startsWith('/admin')) {
+      if (auth.user.role !== 'admin') {
+        return NextResponse.redirect(new URL('/', req.url))
+      }
+    }
+  }
+
   return NextResponse.next()
 })
 
