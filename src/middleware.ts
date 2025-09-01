@@ -1,8 +1,8 @@
-import NextAuth, { NextAuthRequest } from 'next-auth'
-import authConfig from './config/auth'
+export const runtime = "nodejs"
+// 
+import  { NextAuthRequest } from 'next-auth'
 import { NextResponse } from 'next/server'
-
-const { auth } = NextAuth(authConfig)
+import { auth } from './auth';
 
 const PROTECTED_PATHS = ['/admin', '/dashboard', '/profile']
 
