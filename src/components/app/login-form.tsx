@@ -1,12 +1,16 @@
+'use client'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
+import { signIn } from 'next-auth/react'
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'form'>) {
+  const onSignIn = async () => {
+    await signIn('google')
+  }
   return (
     <form className={cn('flex flex-col gap-6', className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -40,7 +44,7 @@ export function LoginForm({
             Or continue with
           </span>
         </div>
-        <Button variant="outline" className="w-full">
+        <Button type='button' variant="outline" className="w-full" onClick={onSignIn}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
             <path
               fill="#4285F4"
