@@ -1,3 +1,4 @@
+import 'server-only'
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
 import { MongoClient, ServerApiVersion } from 'mongodb'
 
@@ -34,4 +35,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // Export a module-scoped MongoClient. By doing this in a
 // separate module, the client can be shared across functions.
+export async function mongodb() {
+  const c = await client.connect()
+  return c.db()
+}
+
 export default client
