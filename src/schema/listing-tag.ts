@@ -1,14 +1,12 @@
-import { z } from "zod";
-
+import { z } from 'zod'
+import { uuidv4 } from '@/lib/uuid'
 
 export const ListingTagSchema = z.object({
-id: z.string().uuid(),
-listing_id: z.string().uuid(),
-tag_id: z.string().uuid(),
-created_at: z.date().optional(),
-updated_at: z.date().optional(),
-// unique([listing_id, tag_id]) at DB level
-});
+  id: z.uuid().default(() => uuidv4()),
+  listing_id: z.uuid(),
+  tag_id: z.uuid(),
+  created_at: z.date().optional(),
+  updated_at: z.date().optional(),
+})
 
-
-export type ListingTag = z.infer<typeof ListingTagSchema>;
+export type ListingTag = z.infer<typeof ListingTagSchema>

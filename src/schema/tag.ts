@@ -1,8 +1,9 @@
 import { z } from 'zod'
 import { TagTypeEnum } from './enums'
+import { uuidv4 } from '@/lib/uuid'
 
 export const TagSchema = z.object({
-  id: z.uuid(),
+  id: z.uuid().default(() => uuidv4()),
   name: z.string().min(1).max(255),
   slug: z
     .string()

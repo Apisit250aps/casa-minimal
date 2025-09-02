@@ -1,7 +1,8 @@
 import { z } from 'zod'
+import { uuidv4 } from '@/lib/uuid'
 
 export const ListingImageSchema = z.object({
-  id: z.uuid(),
+  id: z.uuid().default(() => uuidv4()),
   listing_id: z.uuid(),
 
   path: z.string().min(1),

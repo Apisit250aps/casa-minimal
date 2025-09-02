@@ -1,10 +1,11 @@
 import { z } from 'zod'
+import { uuidv4 } from '@/lib/uuid'
 import { ListingTypeEnum, PropertyTypeEnum, ListingStatusEnum } from './enums'
 
 const nowYear = new Date().getFullYear()
 
 export const ListingSchema = z.object({
-  id: z.uuid(),
+  id: z.uuid().default(() => uuidv4()),
   user_id: z.uuid(),
 
   title: z.string().min(1).max(255),
