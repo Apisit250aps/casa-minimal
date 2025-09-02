@@ -1,37 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Real Estate Platform
 
-## Getting Started
+A modern property listing platform for buying, selling, and renting real estate properties.
 
-First, run the development server:
+## Entity Relationship Diagram
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```mermaid
+erDiagram
+    users {
+        uuid id PK
+        string name
+        string email
+        string role
+        datetime created_at
+        datetime updated_at
+    }
+    
+    listings {
+        uuid id PK
+        uuid user_id FK
+        string title
+        string slug
+        text description
+        enum listing_type
+        enum property_type
+        decimal price
+        int bedrooms
+        int bathrooms
+        decimal area_sqm
+        int year_built
+        int parking_spaces
+        int floor
+        int total_floors
+        enum status
+        decimal latitude
+        decimal longitude
+        string address_line
+        string district
+        string province
+        string postal_code
+        string contact_name
+        string contact_phone
+        string contact_line
+        string contact_email
+        datetime created_at
+        datetime updated_at
+        datetime deleted_at
+    }
+    
+    listing_images {
+        uuid id PK
+        uuid listing_id FK
+        string path
+        boolean is_cover
+        int sort_order
+        datetime created_at
+        datetime updated_at
+    }
+    
+    amenities {
+        uuid id PK
+        string name
+        datetime created_at
+        datetime updated_at
+    }
+    
+    listing_amenities {
+        uuid id PK
+        uuid listing_id FK
+        uuid amenity_id FK
+    }
+    
+    tags {
+        uuid id PK
+        string name
+        enum type
+        datetime created_at
+        datetime updated_at
+    }
+    
+    listing_tags {
+        uuid id PK
+        uuid listing_id FK
+        uuid tag_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    
+    favorites {
+        uuid id PK
+        uuid user_id FK
+        uuid listing_id FK
+        datetime created_at
+        datetime updated_at
+    }
+    
+    users ||--o{ listings : "creates"
+    listings ||--o{ listing_images : "has"
+    listings ||--o{ listing_amenities : "includes"
+    amenities ||--o{ listing_amenities : "belongs_to"
+    listings ||--o{ listing_tags : "tagged_with"
+    tags ||--o{ listing_tags : "applied_to"
+    users ||--o{ favorites : "saves"
+    listings ||--o{ favorites : "favorited_by"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Enums
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ListingType
+- `sale`
+- `rent`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### PropertyType
+- `house`
+- `condo`
+- `townhome`
+- `land`
 
-## Learn More
+### ListingStatus
+- `draft`
+- `published`
+- `archived`
 
-To learn more about Next.js, take a look at the following resources:
+### TagType
+- `general`
+- `location`
+- `feature`
+- `condition`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# casa-minimal" 
+### UserRole
+- `admin`
+- `user`
+- `vendor`
